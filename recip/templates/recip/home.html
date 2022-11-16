@@ -1,0 +1,10 @@
+{% extends "recip/base.html"%}
+
+{%block content %}
+    <h1>
+        {% for r in recip%}
+            {{r.title}}
+            {{r.text}}
+        {%endfor%}
+    </h1>
+{%endblock%}
