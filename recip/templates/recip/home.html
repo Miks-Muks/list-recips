@@ -3,8 +3,8 @@
 {%block content %}
     <h1>
         {% for r in recip%}
-            {{r.title}}
-            {{r.text}}
+        <a href="{% url 'recip_detail'  recip_pk=recip.pk%}">{{r.title}}</a>
+
         {%endfor%}
     </h1>
 {%endblock%}

@@ -42,7 +42,7 @@ class Comments(models.Model):
     )
 
     def __str__(self):
-        return self.recip
+        return self.text
 
 
 class Category(models.Model):

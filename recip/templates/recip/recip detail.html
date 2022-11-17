@@ -1,0 +1,15 @@
+{% extends "recip/base.html"%}
+
+{%block content %}
+
+<div>
+    <h1>
+        {{recip.title}}
+    </h1>
+        <p>{% for c in comments %}
+            {{c.text}}
+        {%endfor%}
+        </p>
+
+</div>
+{%endblock%}
