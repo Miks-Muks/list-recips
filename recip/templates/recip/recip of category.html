@@ -1,0 +1,13 @@
+{% extends "recip/base.html"%}
+
+{%block content %}
+
+<div>
+    <h2>{{ category }}</h2>
+        <p>{% for r in recip  %}
+          <a href="url 'recip_detail' recip_pk=recip.pk" >{{r.title}}</a>
+        {%endfor%}
+        </p>
+
+</div>
+{%endblock%}

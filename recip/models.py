@@ -24,6 +24,7 @@ class Recip(models.Model):
     published = models.BooleanField(
         default=False
     )
+    image = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

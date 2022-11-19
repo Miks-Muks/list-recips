@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from recip.models import Recip, Category, Comments
 
 
@@ -24,7 +24,7 @@ def categories(request):
 def recip_of_category(request, categories_pk):
     category = Category.objects.get(pk=categories_pk)
     recipes = Recip.objects.filter(categories=categories_pk)
-    return render(request, 'recip/categories.html', {'category': category, 'recip': recipes})
+    return render(request, 'recip/recip of category.html', {'category': category, 'recip': recipes})
 
 
 def search_recip(request):
@@ -34,4 +34,8 @@ def search_recip(request):
 def recip_delete(request, recip_pk):
     recip = get_object_or_404(Recip, pk=recip_pk).delete()
     return redirect('home')
+
+
+
+
 

@@ -5,11 +5,13 @@
 <div>
     <h1>
         {{recip.title}}
+        {{recip.text}}
+        {% load static %}
+            <img src="{{recip.image.url}}">
+
     </h1>
-        <p>{% for c in comments %}
-            {{c.text}}
-        {%endfor%}
-        </p>
+
+
 
 </div>
 {%endblock%}
