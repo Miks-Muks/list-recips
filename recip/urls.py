@@ -3,6 +3,7 @@ from recip.views import home, recip_detail, categories, recip_delete, recip_of_c
 
 urlpatterns = [
     path('home', home, name='home'),
+    path('', home, name='home'),
     path('recip detail/<int:recip_pk>', recip_detail, name='recip_detail'),
     path('categories', categories, name='categories'),
     path('recip delete/<int:recip_pk', recip_delete, name='recip_delete'),
