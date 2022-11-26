@@ -1,13 +1,18 @@
 from django.urls import path
-from recip.views import home, recip_detail, categories, recip_delete, recip_of_category
+from .views import (
+    RecipListView,
+    RecipDetailView,
+    RecipCreateView,
+    RecipUpdateView,
+    RecipDeleteView
+)
+from . import views
 
 urlpatterns = [
-    path('home', home, name='home'),
-    path('', home, name='home'),
-    path('recip detail/<int:recip_pk>', recip_detail, name='recip_detail'),
-    path('categories', categories, name='categories'),
-    path('recip delete/<int:recip_pk', recip_delete, name='recip_delete'),
-    path('recip of category/<int:categories_pk', recip_of_category, name='recip_of_category'),
-
-
+    path('', RecipListView.as_view(), name='recip-home'),
+    path('recip/<int:pk>/', RecipDetailView.as_view(), name='recip-detail'),
+    path('recip/new/', RecipCreateView.as_view(), name='recip-create'),
+    path('recip/<int:pk>/update/', RecipUpdateView.as_view(), name='recip-update'),
+    path('recip/<int:pk>/delete/', RecipDeleteView.as_view(), name='recip-delete'),
+    path('about/', views.about, name='blog-about'),
 ]

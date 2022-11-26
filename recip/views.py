@@ -1,41 +1,69 @@
-from django.shortcuts import render, redirect, get_object_or_404
-# from django.http import HttpResponse
-from recip.models import Recip, Category, Comments
+from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+from .models import Recip
 
-
-# Create your views here.
 
 def home(request):
-    recip = Recip.objects.all()
-    return render(request, 'recip/home.html', {'recip': recip})
+    context = {
+        'recip': Recip.objects.all()
+    }
+    return render(request, 'recip/home.html', context)
 
 
-def recip_detail(request, recip_pk):
-    recip = Recip.objects.get(pk=recip_pk)
-    comments = Comments.objects.filter(recip=recip_pk)
-    return render(request, 'recip/recip detail.html', {'recip': recip, 'comments': comments})
+class RecipListView(ListView):
+    model = Recip
+    template_name = 'recip/home.html'
+    context_object_name = 'recipes'
 
 
-def categories(request):
-    categories = Category.objects.all()
-    return render(request, 'recip/categories.html', {'categories': categories})
+class RecipDetailView(DetailView):
+    model = Recip
 
 
-def recip_of_category(request, categories_pk):
-    category = Category.objects.get(pk=categories_pk)
-    recipes = Recip.objects.filter(categories=categories_pk)
-    return render(request, 'recip/recip of category.html', {'category': category, 'recip': recipes})
+class RecipCreateView(LoginRequiredMixin, CreateView):
+    model = Recip
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
-def search_recip(request):
-    pass
+class RecipUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Recip
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 
-def recip_delete(request, recip_pk):
-    recip = get_object_or_404(Recip, pk=recip_pk).delete()
-    return redirect('home')
+class RecipDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Recip
+    success_url = '/'
+
+    def test_func(self):
+        recip = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 
+def about(request):
+    return render(request, 'blog/about.html', {'title': 'О клубе Python Bites'})
 
 
 
