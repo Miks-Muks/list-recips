@@ -11,16 +11,11 @@ from .models import Recip
 
 
 def home(request):
+    recip = Recip.objects.all()
     context = {
-        'recip': Recip.objects.all()
+        'recip': recip,
     }
     return render(request, 'recip/home.html', context)
-
-
-class RecipListView(ListView):
-    model = Recip
-    template_name = 'recip/home.html'
-    context_object_name = 'recipes'
 
 
 class RecipDetailView(DetailView):
@@ -63,7 +58,7 @@ class RecipDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    return render(request, 'blog/about.html', {'title': 'О клубе Python Bites'})
+    return render(request, 'blog/about.html', {'title': 'О сайте'})
 
 
 

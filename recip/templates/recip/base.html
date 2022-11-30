@@ -15,25 +15,26 @@
 
     {% block title %}
 
-        <title>Zamira-log </title>
+        <title>Mira-log </title>
     {% endblock %}
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'recip-home' %}"><i class='bx bxs-rocket bx-tada-hover'></i> Zamira-log</a>
+          <a class="navbar-brand mr-4" href="{% url 'home' %}"><i class='bx bxs-rocket bx-tada-hover'></i> Mira-log</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link " href="{% url 'recip-home' %}">Главная</a>
-              <a class="nav-item nav-link" href="{% url 'recip-home' %}">О сайте</a>
+              <a class="nav-item nav-link " href="{% url 'home' %}">Главная</a>
+              <a class="nav-item nav-link" href="{% url 'about' %}">О сайте</a>
             </div>
             <!-- Правая часть навигационной панели -->
             <div class="navbar-nav">
                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'recip-create' %}">Новая запись</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Профиль</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a>
               {% else %}
@@ -60,12 +61,10 @@
         <div class="col-md-4">
           <div class="content-section">
             <h3>Разделы</h3>
-            <p class='text-muted'>новости и события
+            <p class='text-muted'>Категории блюд и события
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light">Новые записи</li>
-                <li class="list-group-item list-group-item-light">Объявления</li>
-                <li class="list-group-item list-group-item-light">Соревнования</li>
-                <li class="list-group-item list-group-item-light">Встречи участников</li>
+                <li class="list-group-item list-group-item-light">Категории</li>
               </ul>
             </p>
           </div>
@@ -75,7 +74,8 @@
     </main>
     <!-- Футер закреплен внизу, независимо от количества постов на странице -->
     <footer class="text-center bg-dark">
-      <p><a href="{% url 'recip-home' %}">© Zamira-log 2022</a></p>
+      <p><a href="{% url 'home' %}">©Mira-log 2022</a></p>
+        <p><a href="https://mail.ru/">maxikavia@mail.ru©</a></p>
     </footer>
 
     <!-- Дополнительные скрипты JavaScript -->
